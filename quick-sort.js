@@ -5,7 +5,10 @@ function randomPartition(arr, low, high) {
 		// ** (high - low + 1) will give us the size of the elements (4-3+1) = 2 array of [1,2] from taken array
 		//** Math.floor(Math.random() * 2) => will always give us the number between 0 (inclusive) to 2 (exlusive) because floor will round down the value so there will be only 2 values possible for 2 size aarray which is 0 and 1.
 		//** but our array indexing is begining from 3 (low) so we shift the above calculation by low, thats why we added +low at the end to shift the indexing to the desired window (3 to 4). **//
+		
+		//** swapped the randomIndex with low since we are considering low as our pivot so to keep the logic unchanged we swapped it with low.**//
 		[arr[low], arr[randomIndex]] = [arr[randomIndex], arr[low]];
+		
 		return partition(arr, low, high);
 }
 
