@@ -7,7 +7,7 @@ function largestElement(arr){
 	//** sort the array, if we sort the array we now the largest element would be on the last element in the array. **//
 	//** but since we know array sorting takes O(n*logn) time so the time complexity of this algo. would be O(n*logn). **//
 	
-	arr.sort();
+	arr.sort((a, b) => a - b);
 	return arr[arr.length - 1];
 }
 
