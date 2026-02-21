@@ -29,12 +29,12 @@ function removeDuplicateFromSortedArray(arr){
 
 //** optimal approach **//
 
-//** since the array is already sorted so we can confirm that is the next element is either gonna be the same element or bigger element, so we can take 2 pointer (i, j) if we encounter the same element we can move the (j) pointer to find the bigger element and replace the (i) pointer with the (j) pointer value
+//** since the array is already sorted so we can confirm that is the next element is either gonna be the same element or bigger element, so we can take 2 pointer (i, j) if we encounter the same element we can move the (j) pointer to find the bigger element and replace the (i+1) pointer with the (j) pointer value
 //** since we only need the length of unique array we do not care what ever be stored after that be it null, undefined until explicitly asked.
 //** arr = [1,1,2,2,2,3,3,3,4] => [1,2,3,4,_,_,_,_,_]
 //** once pointer j crossed the array length the pointer i will be the length of unique array.
 
-//** suppose we put the pointer i at the 0th index becuase the 0th index will always be gonna included in the unique array and we put the j pointer to the 1st index and start the iteration like is j equal to i if yes we march forward (j++) again check is j equal to i this time its no so we swap the value of j with the i+1 (next) index and also do i++ to keep the track of array uniqueness till that index. we repeat the process until j crosses the array at that point what ever the value of i will be out answer (i+1, becuase i is representing the index and we want the length)
+//** suppose we put the pointer i at the 0th index becuase the 0th index will always be gonna included in the unique array and we put the j pointer to the 1st index and start the iteration like is j equal to i if yes we march forward (j++) again check is j equal to i this time its no so we swap the value of j with the i+1 (next) index and also do i++ to keep the track of array uniqueness till that index. we repeat the process until j crosses the array at that point what ever the value of i will be our answer (i+1, becuase i is representing the index and we want the length)
 
 function optimalRemoveDuplicateFromSortedArray(arr){
 	i = 0;
