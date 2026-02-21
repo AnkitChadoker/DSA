@@ -67,7 +67,7 @@ function quickSortIterative(arr){
 	while(stack.length > 0){
 		const [low, high] = stack.pop();
 		if(low < high){
-			let pIndex = randomPartition(arr, low, high);
+			let pIndex = partitionUsingSinglePointer(arr, low, high);
 			stack.push([low, pIndex-1]);
 			stack.push([pIndex + 1 , high]);
 		}
@@ -75,4 +75,44 @@ function quickSortIterative(arr){
 	return arr;
 }
 
-//console.log(quickSortIterative([1,2,2,4,5,1,4,54,645,3,5,4]));
+console.log(quickSortIterative([6,7,4,6,78,3,3,3,5,4,3,5,3,4]));
+
+//** pivot as low **/
+/* function partitionUsingSinglePointer(arr, low, high){
+		const pivot = low;
+		
+		// i representing the smaller region here since when we select the low as pivot the array should be divided like this [pivot | smalller | greater] and we can not guarantee at the begining if there is any smaller element or not thats why we take i = low, meaning there is no element in the smaller part as of now.
+		let i = low;
+		
+		for(let j = i + 1; j<= high; j++){
+			if(arr[j] < arr[pivot]){
+				// since i representing the lower part of the array (meaning the element lower than the pivot should be before pivot) thats why as soon as we encounter any smaller element than pivot we increment i and swap the smaller value with it (swap(i,j).
+				i++;
+				[arr[i], arr[j]] = [arr[j], arr[i]];
+			}
+		}
+		
+		// at the the end i will be pointing the correct postion of the pivot.
+		[arr[i], arr[pivot]] = [arr[pivot], arr[i]];
+		return i;
+} */
+
+//** pivot as high **/
+function partitionUsingSinglePointer(arr, low, high){
+	const pivot = high;
+	
+	// since i representing the lower part of an array and we are choosing pivot as high so we do not no if there is any smaller element then the pivot at all so we take i = low - 1 and as we scan from low to high and find the smaller element than pivot we increment the i.
+	
+	// i representing the smaller region here since when we select the high as pivot the array should be divided like this [smalller | greater | pivot] and we can not guarantee at the begining if there is any smaller element or not thats why we take i = low - 1, meaning there is no element in the smaller part as of now.
+	let i = low - 1;
+	for(let j = low; j<= high; j++){
+		if(arr[j] < arr[pivot]){
+			i++;
+			[arr[i], arr[j]] = [arr[j], arr[i]];
+		}
+	}
+	
+	// since we already took i = low - 1 so at the time of swapping we must +1 otherwise it would throw undefined index becuase suppose 0th element is the correct position itself than i would be -1 becuase it did not increment at all so we need to do i+1 to make it under boundation.
+	[arr[i+1], arr[pivot]] = [arr[pivot], arr[i+1]];
+	return i+1;
+}
