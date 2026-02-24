@@ -34,4 +34,38 @@ function moveZeroToEnd(arr){
 	*/	
 }
 
-console.log(moveZeroToEnd([1,2,0,0,4,3,5,0,7,8,0,9])) //[1,2,4,3,5,7,8,9,0,0,0,0]
+//console.log(moveZeroToEnd([1,2,0,0,4,3,5,0,7,8,0,9])) //[1,2,4,3,5,7,8,9,0,0,0,0]
+
+/** OPTIMAL APPROACH */
+/**
+  we can use 2 pointers approach here pointer i to keep track of 0 elements and pointer j to replace the i (0 element with the non zero element), this way we can do in place replacement and save us the additional space.
+*/
+
+
+function optimalMoveZeroToEnd(arr){
+	// first find out the first 0 element position in the array.
+	let j = 0;
+	let count = 0;
+	while(j < arr.length){
+		if(arr[j] === 0) break;
+		count++;
+		j++;
+	}
+	// if no 0 is found just return no need to do anything.
+	if(count === arr.length - 1){ return arr; }
+	console.log('here');
+	// place next pointer j to the next index of j
+	let i = j + 1; 
+	
+	while(i < arr.length){
+		if(arr[i] !== 0){
+			[arr[j], arr[i]] = [arr[i], arr[j]];
+			i++;
+			j++;
+		} else {
+			i++;
+		}
+	}
+	return arr;	
+}
+console.log(optimalMoveZeroToEnd([1,2,3]));
