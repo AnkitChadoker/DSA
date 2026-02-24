@@ -71,7 +71,7 @@ and then replacing the array from (length - rotation) to n.
 lets do it using code
 **/
 
-/** Brute Force **/
+/** BRUTE FORCE **/
 //lets say d = 15
 // arr = [1,2,3,4,5,6]
 function leftRotateArrayByDPlaces (arr, d){	
@@ -112,4 +112,44 @@ function leftRotateArrayByDPlaces (arr, d){
 	*/
 }
 
-console.log(leftRotateArrayByDPlaces([1,2,3,4,5,6], 15))
+//console.log(leftRotateArrayByDPlaces([1,2,3,4,5,6], 15))
+
+
+//** OPTIMAL APPROACH **/
+/** 
+	we can do this in place instead of taking extra array space but there is trick to do it.
+	1. we can get the number of elements need to be rotated and till that number we can reverse the array.
+	2. and again reverse the remaining array as well.
+	3. now reverse the entire array again and the array will be left rotated by that many places.
+**/
+//lets say d = 15
+// arr = [1,2,3,4,5,6]
+function optionmalLeftRotateByDPlaces(arr, d){
+	const arrLength = arr.length; // 6
+	const rotations = d % arrLength; // 3
+	if(rotations === 0) return arr;
+	reverse(arr, 0, rotations - 1); // (0,2) => [(3,2,1),  4,5,6]
+	reverse(arr, rotations, arrLength - 1); // (3,5) => [3,2,1  (6,5,4)]
+	reverse(arr, 0, arrLength - 1); // (0,5) =>  [4,5,6,1,2,3]
+	return arr;
+	
+	/**
+		TC:
+			first reverse O(r/2) { reverse is happening using 2 pointers.
+			second reverse O(n-r/ 2)
+			third reverse O(n/2)
+			total O(r/2 + (n-r)/2 + n/2) = O(2n/2) = O(n)
+			
+		SC: O(1)
+	**/
+}
+
+console.log(optionmalLeftRotateByDPlaces([1,2,3,4,5,6], 15)) // [4,5,6,1,2,3]
+
+function reverse(arr, start, end){
+	while(start < end){
+		[arr[start], arr[end]] = [arr[end], arr[start]];
+		start++;
+		end--;
+	}	
+}
