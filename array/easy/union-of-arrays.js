@@ -32,7 +32,7 @@ function unionOfArrays(arr1, arr2){
 		m = n1 + n2
 		TC: O(m * logm) // because set takes logn time to add an element into the set. and we are linearly scanning through both the arrays entirelly
 		
-		SC: O(m) // at worst case both the array elements are entirelly diffrent meaning no match elements are there so we need to store all the elements from both the arrays into the set.
+		SC: O(m) // at worst case both the array elements are entirelly different meaning no match elements are there so we need to store all the elements from both the arrays into the set.
 	*/
 }
 
