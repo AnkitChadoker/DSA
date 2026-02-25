@@ -45,14 +45,12 @@ function moveZeroToEnd(arr){
 function optimalMoveZeroToEnd(arr){
 	// first find out the first 0 element position in the array.
 	let j = 0;
-	let count = 0;
 	while(j < arr.length){
 		if(arr[j] === 0) break;
-		count++;
 		j++;
 	}
 	// if no 0 is found just return no need to do anything.
-	if(count === arr.length - 1){ return arr; }
+	if(j === arr.length){ return arr; }
 	console.log('here');
 	// place next pointer j to the next index of j
 	let i = j + 1; 
