@@ -6,7 +6,7 @@
  	not a subarray: [1,2,4], [5,7], [6,8]
  **/
 
-/** only positive numbers, array can only contain positive numbers only, (>0) **/
+/** only positive numbers, array can only contain positive numbers only, (>=0) **/
 /** arr = [10, 5, 2, 7, 1, 9],  target = 15
  	output = 4 //[5, 2, 7, 1]
 	though [10, 5] also giving us the target but we need the longest subarray thats why the above output is expected.
@@ -91,4 +91,51 @@ function BBFlongestSubArrayWithTargetSum(arr, target){
 	return longestSubArrayLength;
 }
 
-console.log(BBFlongestSubArrayWithTargetSum([10, 5, 2, 7, 1, 9], 15));
+//console.log(BBFlongestSubArrayWithTargetSum([10, 5, 2, 7, 1, 9], 15));
+
+
+/** BETTER SOLUTION **/
+
+/*** THIS IS FOR ONLY NUMBER ABOVE 0 **/
+
+/** we can use map and store the index and the sum at that index and on each iteration if we match the target thats our new lenght if its obviously greater than previous lenght, and if its greater than the target we can check if at any index we have the value which is the difference of (current sum - target), because from that index onwards the sum of all the elements till the current "i" is equal to target.
+	 
+  i   sum
+
+| 5 => 34 | target greater by 19, so we have any point where total was 19, no so we return our answer.
+| 4 => 25 | target greater by 10, do we have any point previously where total was 10, yes we do have which was at index 0 so from 
+				there onwards we would have another sub array matching our target length (i - index of count found)
+| 3 => 24 | target greater by 9 do we have any point previously where total was 9, no
+| 2 => 17 | greater than target by 2 so do we have any point where we have 2 as a total, no
+| 1 => 15 | equal to target update maxLength i+1
+| 0 => 10 | less then target 
+ ---------
+
+**/
+
+function betterLongestSubArrayWithTargetSum(arr, target){
+	let longest = 0;
+	const map = new Map();
+	let sum = 0
+
+	for(let i = 0; i < arr.length; i++){
+		sum += arr[i]		
+
+		if(sum === target){
+			longest = Math.max(longest, i+1);
+		}
+
+		const diff = sum - target;
+		if(map.has(diff)){
+			longest = Math.max(longest, i - map.get(diff));
+		}
+
+		map.set(sum, i);
+		
+	}
+	return longest;
+}
+
+console.log(betterLongestSubArrayWithTargetSum([10, 5, 2, 7, 1, 9, 5, 1, 1, 1, 1, 1, 1, 1, 1, 2], 15)); // 10
+
+
