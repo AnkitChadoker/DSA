@@ -92,7 +92,7 @@ function betterTwoSum(arr, target){
 /** 
  	we can use 2 pointer approach after sorting the array, since sorting will disturb the real indexing of the array thats why its not optimal solution for index probelm, becuase to know the original indexing of the array element we need to store it into the array or map that will use additional space thats why its not optimal for indexing problem.  
 
- 	after sorting we can have 2 pointers one at begining and another at the last and we can get the addition of both the pointers to match the target but if its greater than the target then we need to unshift (j--) the last pointer because array is sorted and if the addition is greater than target meaning we might get the target sum left side only becuase right side it will only get bigger and bigger, similarly if the addition is smaller than the target we shift (i++) the start pointer to get the bigger element.
+ 	after sorting we can have 2 pointers one at begining and another at the last and we can get the addition of both the pointers to match the target but if its greater than the target then we need to shift (j--) the last pointer because array is sorted and if the addition is greater than target meaning we might get the target sum left side only becuase right side it will only get bigger and bigger, similarly if the addition is smaller than the target we unshift (i++) the start pointer to get the bigger element.
 **/
 
 function optimalTwoSum(arr, target){
