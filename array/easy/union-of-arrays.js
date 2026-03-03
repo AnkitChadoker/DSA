@@ -4,6 +4,29 @@ The union of two arrays is an array where all values are distinct and are presen
 **/
 
 //** BRUTE FORCE **//
+function absoluteBruteUnionOfArrays(arr1, arr2){
+	const resultArr = [];
+	for(let i = 0; i< arr1.length; i++){
+		if(resultArr.includes(arr1[i])) continue;// linear scanning will take O(n) as well
+		else resultArr.push(arr1[i])
+	}
+
+	for(let i = 0; i< arr2.length; i++){
+		if(resultArr.includes(arr2[i])) continue;
+		else resultArr.push(arr2[i])
+		
+	}
+
+	return resultArr.sort((a,b) => a-b);
+
+	/*
+		TC: O(n1^2) + O(n2^2) + O((n1+n2)*log(n1+n2))
+		SC: O(n1 + n2)
+	*/
+}
+//console.log(absoluteBruteUnionOfArrays([1, 2, 7], [1, 2, 3, 4, 5]))
+
+//** BETTER APPROACH **//
 function unionOfArrays(arr1, arr2){
 	let i = 0;
 	let j = 0;
@@ -23,19 +46,19 @@ function unionOfArrays(arr1, arr2){
 	return [...set];
 	
 	/*
-		Set maintains the order of the numbers as well thats why it takes that extra logn time to insert new element.
+		In JS we do not have the ordered set in built so the set will store the elements in the order the were pushed into the set, so if problem ask us to return the sorted array we will have to sort the set array and return it that will take extra nlong time as well.
 		
 		m = n1 + n2
-		TC: O(m * logm + m*logm) // because set takes logn time to add an element into the set. and we are linearly scanning through both the arrays entirely
+		TC: O(m) + O(m * logm) // we are linearly scanning through both the arrays entirely, extra m*logm time for sorting if the problem requires that.
 		
 		SC: O(m) // at worst case both the array elements are entirelly different meaning no match elements are there so we need to store all the elements from both the arrays into the set.
 	*/
 }
 
-//console.log(unionOfArrays([1, 2, 3, 4, 5], [1, 2, 7])) // [1, 2, 3, 4, 5, 7]
+//console.log(unionOfArrays([1, 2, 7], [1, 2, 3, 4, 5])) // [1, 2, 3, 4, 5, 7]
+
 
 //** OPTIMAL APPROACH **/
-
 function optimalUnionOfArrays(arr1, arr2){
 	const unionArr = [];
 	let i = 0;
@@ -89,4 +112,4 @@ function optimalUnionOfArrays(arr1, arr2){
 	**/
 }
 
-console.log(optimalUnionOfArrays([1, 2, 3, 4, 5], [6, 7, 8])) // [1, 2, 3, 4, 5, 6, 7, 8]
+//console.log(optimalUnionOfArrays([1, 2, 3, 4, 5], [6, 7, 8])) // [1, 2, 3, 4, 5, 6, 7, 8]
