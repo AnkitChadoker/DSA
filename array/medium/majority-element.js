@@ -81,6 +81,11 @@ function optimal(arr){
 	}
 
 	return candidate;
+
+	/*
+		TC: O(n)
+		SC: O(1)
+	*/
 }
 
 console.log(optimal([1,2,1,4,5,1,1,7]));
