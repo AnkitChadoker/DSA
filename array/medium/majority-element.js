@@ -56,4 +56,31 @@ function betterMajorityElement(arr){
 		SC: O(n) //if no majority element is there the map might have all the elements in it at worst case
 	*/ 
 }
-console.log(betterMajorityElement([1,2,1,4,5,1,1,7,1]));
+//console.log(betterMajorityElement([1,2,1,4,5,1,1,7,1]));
+
+
+/** OPTIMAL APPRAOCH **/
+/** Moore's voting algo. **/
+
+function optimal(arr){
+	let candidate = arr[0];
+	let count = 1;
+
+	for(let i = 1; i < arr.length; i++){
+		if(count === 0){ candidate = arr[i] };
+
+		if(arr[i] === candidate){
+			count++;
+		} else {
+			count--;			
+		}
+
+		if(count === 0){
+			candidate = -1;
+		}
+	}
+
+	return candidate;
+}
+
+console.log(optimal([1,2,1,4,5,1,1,7]));
