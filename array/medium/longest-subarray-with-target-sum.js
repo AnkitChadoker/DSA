@@ -159,7 +159,7 @@ function betterLongestSubArrayWithTargetSum(arr, target){
 	*/
 }
 
-//console.log(betterLongestSubArrayWithTargetSum([2,0,1,1,1,0,3], 3)); // 5
+//console.log(betterLongestSubArrayWithTargetSum([0,0,-1,0,0,-1,-2], -1)); // 5
 
 
 /** OPTIMAL SOLUTION **/
@@ -186,14 +186,14 @@ function optimalLongestSubArrayWithTargetSum(arr, target){
 			}			
 		}
 
-		end++;
-		
+		if(target === sum){
+			longest = Math.max(longest, end-start+1);
+		}
+
+		end++;	
 		/** if end at (arr.length - 1) index, then without checking the condition it will cross the bound of array after increment (++) **/
 		if(end < arr.length){			
-			sum += arr[end];
-			if(target === sum){
-				longest = Math.max(longest, end-start+1);
-			}
+			sum += arr[end];			
 		}
 	}
 
@@ -212,6 +212,6 @@ function optimalLongestSubArrayWithTargetSum(arr, target){
 	**/
 }
 
-console.log(optimalLongestSubArrayWithTargetSum([2,1,1,1,3], 15)); // 3
+console.log(optimalLongestSubArrayWithTargetSum([10, 5, 2, 7, 1, 9], 15)); // 3
 
 
