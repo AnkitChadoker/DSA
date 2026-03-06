@@ -39,23 +39,55 @@ function maxSubarraySum(arr){
 /** OPTIMAL APPROACH **/
 
 /** KADANE'S ALGORITHM **/
-/** according to the algorithm we iterate over the array and and keep on adding each element of the array into the sum and on each iteration we check against the largestSum as well if sum is greater than largestSUm we replace it and if any moment sum becomes less than 0 we reset it 0, becuase a negative sum can never help us find the larger sum. **/
+/** according to the algorithm we iterate over the array and and keep on adding each element of the array into the sum and on each iteration we check against the largestSum as well if sum is greater than largestSUm we replace it and if any moment sum becomes less than 0 we reset it 0, becuase a negative sum can never help us find the larger sum. 
+**/
 
 function optimalMaxSubarraySum(arr){
 	let largestSum = -Infinity;
 	let sum = 0;
 
+	let startAt = 0;
+	let startIndex = -1;
+	let endIndex = -1
+
 	for(let i = 0; i < arr.length; i++){
+
+		/** because if any point sum is 0 meaning we are starting the new subarray. **/
+
+		if(sum === 0) {
+			startAt = i;
+		}
+
 		sum += arr[i];
 
 		if(sum > largestSum){
 			largestSum = sum;
+
+			/** only if new subarray has the sum larger than previous sub array sum then only we update the indexes of subarray **/
+			startIndex = startAt;
+			endIndex = i;
 		}
 
-		if(sum < 0) sum = 0;
+		/** we are reseting the sum to 0 if anytime it reaches below 0 because if we carry the negative value in the next iteration, we will be in that much loss already instead of summing up we are reducing it, thats why if our sum at any point goes below 0 we are starting the new subarray from next iteration because till here we are already in loss adding this sub array element into the result would never give us the largest sum. **/
+
+		if(sum < 0) { sum = 0; }
 	}
 
+	
+	/** if we are asked to print the subarray as well which is giving us the largest sum, so below code is for that **/
+	const subArray = [];
+	for(let i = startIndex; i <= endIndex; i++){
+		subArray.push(arr[i]);
+	}
+	console.log(subArray);
+
+
 	return largestSum;
+
+	/**
+	 * TC: O(n) // for returning sub array it would be additional O(n) at worst if subarray is the array itself.
+	 * SC: O(1) // for returning subb array it would be also O(n) at worst case, will be storing all the elements in the new array (subArray) 
+	**/
 }
 
 
