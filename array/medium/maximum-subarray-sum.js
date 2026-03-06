@@ -34,4 +34,29 @@ function maxSubarraySum(arr){
 	**/
 }
 
-console.log(maxSubarraySum([2, 3, 5, -2, 7, -4]));
+//console.log(maxSubarraySum([2, 3, 5, -2, 7, -4]));
+
+/** OPTIMAL APPROACH **/
+
+/** KADANE'S ALGORITHM **/
+/** according to the algorithm we iterate over the array and and keep on adding each element of the array into the sum and on each iteration we check against the largestSum as well if sum is greater than largestSUm we replace it and if any moment sum becomes less than 0 we reset it 0, becuase a negative sum can never help us find the larger sum. **/
+
+function optimalMaxSubarraySum(arr){
+	let largestSum = -Infinity;
+	let sum = 0;
+
+	for(let i = 0; i < arr.length; i++){
+		sum += arr[i];
+
+		if(sum > largestSum){
+			largestSum = sum;
+		}
+
+		if(sum < 0) sum = 0;
+	}
+
+	return largestSum;
+}
+
+
+console.log(optimalMaxSubarraySum( [-1, 2, 3, -1, 2, -6, 5]));
