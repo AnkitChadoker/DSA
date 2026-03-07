@@ -77,4 +77,38 @@ function betterLongestConsecutiveSequence(arr){
 	 * SC: O(1)
 	 * **/
 }
-console.log(betterLongestConsecutiveSequence([100, 4, 200, 1, 3, 2, 101, 102,1, 2, 2, 2, 4, 4, 4])); // 4 [1,2,3,4]
+//console.log(betterLongestConsecutiveSequence([100, 4, 200, 1, 3, 2, 101, 102, 1, 2, 2, 2, 4, 4, 4])); // 4 [1,2,3,4]
+
+
+/*** OPTIMAL APPROACH **/
+/** since we used sorting in the above approach which will currupt the given input, instead we can use set data structure, because there may be repeatative elements in the array so we can filter them out and also lookup for next element in the set will only take O(1) time in best and avg. case, in JS we do not have ordered set, we only have unordered set so by default JS engineds handles the collisions efficiently so we need not to worry about the worst case O(n), it can be negligible **/
+
+function optimalLongestConsecutiveSequence(arr){
+	const set = new Set();
+	let longest = 0;
+
+	for(let i = 0; i < arr.length; i++){
+		set.add(arr[i]);
+	}
+
+	for(let value of set){
+		if(!set.has(value - 1)){ // we can save us some extra iteration for the elements which are not the starting of the sequence	like for 101 we can check if 100 is there then the actual sequence should began from 100 and not from 101 so we can discard that perticuler iteration entirely.		
+			let currentSequence = 1;
+			let nextEle = value + 1
+			while(set.has(nextEle)){ // this will be O(1) operations, and not the linear operation O(n)		
+				currentSequence++;
+				nextEle += 1;
+			}
+			longest = Math.max(longest, currentSequence);
+		}
+	}
+
+	return longest;
+
+	/**
+	 * TC: O(n) + O(n) = O(2n) // linear scanning to set the values in the set DS + to find the sequences using set DS.
+	 * SC: O(n) // set DS storage space
+	 * **/
+}
+
+console.log(optimalLongestConsecutiveSequence([100, 4, 200, 1, 3, 2, 101, 102, 1, 2, 2, 2, 4, 4, 5, 4])); // 5 [1,2,3,4,5]
