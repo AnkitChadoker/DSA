@@ -28,6 +28,39 @@ function maximumProfit(arr){
 	}
 
 	return maxProfit;
+
+	/**
+	 * TC: ~ O(n^2)
+	 * SC: O(1)
+	**/
 }
 
-console.log(maximumProfit([10, 7, 5, 8, 11, 9])) // 6
+//console.log(maximumProfit([10, 7, 5, 8, 11, 9])) // 6
+
+
+/** OPTIMAL SOLUTION **/
+
+/** instead of considering each day as a buying day lets consider each day as a selling day and for profit to be maximized we must need to track down the day when the stock price was minimal and consider that day as a buying day and obviously the buying day will always be left side of the selling day, that way we can gain the maximum profit. since for the first day (0th index) we can not have any buying day so we consider the minStockPrice as the infinity before the first day and then as we keep on going in the loop we replace it with the each days price if its minimum than the standing minStockPrice, that way we can keep track of the minStockAmount with respect to the each future day. **/
+
+function optimalMaximunProfit(arr){
+	let minStockPrice = Infinity;
+	let maxProfit = 0;
+
+	for(let i = 0; i < arr.length; i++){
+			
+		const profitOnTheDay = arr[i] - minStockPrice;
+		maxProfit = Math.max(profitOnTheDay, maxProfit);
+
+		/** before going to next day challange the min. stock price with todays price **/
+		minStockPrice = Math.min(minStockPrice, arr[i]);
+	}
+
+	return maxProfit;
+
+	/**
+	 * TC: O(n)
+	 * SC: O(1)
+	**/
+}
+
+console.log(optimalMaximunProfit([10, 7, 5, 8, 11, 9])) // 6
