@@ -73,3 +73,36 @@ function rearrangeElementsBySign(arr){
 }
 
 //console.log(rearrangeElementsBySign([2, 4, 5, -1, -3, -4])); //[2, -1, 4, -3, 5, -4]
+
+
+
+//** OPTIMAL APPROACH **//
+/** though we need to shuffle the array that two the elements are unpredicatable so we need the extra space to store those new arrangements, but can we optimize the TC, lets see **/
+/** we can linearly iterate over the given array and since we know that the array size will always be an even number becuase there will be always equal number of elements of both sign, and also we know that positves are being stored at even indexing (because problem stated that rearrangements will be started from positive number) and starting index will be 0 then 2 then 4 and negatives will be stored at odd index like 1, 3 and 4 we can clearly se the indexing is incrementing by 2 for both negative and positive so while iterating over the array we can check is number is postive we can store that number in even pointer and increment the pointer by 2 and same goes for negatives as well **/
+
+function optimalRearrangeElementsBySign(arr){
+	const rearranged = [];
+	let  even = 0;
+	let odd = 1;
+
+	for(let i = 0; i < arr.length; i++){
+		if(arr[i] < 0){
+			//negative
+			rearranged[odd] = arr[i];
+			odd += 2;
+		} else {
+			//positive
+			rearranged[even] = arr[i];
+			even += 2;
+		}
+	}
+
+	return rearranged;
+
+	/**
+	 * TC: O(n)
+	 * SC: O(n)
+	**/
+}
+
+console.log(optimalRearrangeElementsBySign([2, 4, 5, -1, -3, -4])); //[2, -1, 4, -3, 5, -4]
