@@ -39,6 +39,54 @@ function leaders(arr){
 	}
 
 	return leadersArr;
+
+	/**
+	 * TC: O(n^2)
+	 * SC: O(n) // if array is sorted in descending order all the elements will be leaders.
+	**/
 }
 
-console.log(leaders([1, 2, 5, 3, 1, 2])); //output [5,3,2]
+//console.log(leaders([1, 2, 5, 3, 1, 2])); //output [5, 3, 2]
+
+
+/** OPTIMAL APPROACH **/
+/** we will need the extra space to represent the leaders of the original array, so we can optimize it based on TC only, since its already O(n^2) in brute approach we can reduce it to min of O(n) because we need to iterate over the array atleast once to know the leaders **/
+
+/** Here is the insight since we know the last element of the array will always be the leader no matter how small it is, so we already have a leader, now for the rest of the elements we know that if there is no greater element than the element it is the leader.
+so what we can so it we can start the iteration from behind taking the last element as our first leader than we move left considering as the maximum element and when we move to the second last element if its greater than the last element meanining it is the leader and we can replace the maximum element with the second last element to challange the next leader, we keep on doing that and we will get our leaders. 
+	
+	SIMPLE LOGIC:: in order for any element to be the leader it must be greater than the maximum element we have encountered till now.
+
+but here is a minor catch since we are iterating from behind the leaders array would be filled from behind as well but according to the problem we must maintain the order of the elements as per the original array, so we need to reverse the leaders array at the end and then return the leaders array 
+**/
+
+function optimalLeaders(arr){
+	let max = arr[arr.length-1];
+	const leadersArr = [max];
+
+	for(let i = arr.length - 2; i >= 0; i--){
+		if(arr[i] > max){
+			leadersArr.push(arr[i]);
+			max = arr[i];
+		}
+	}
+
+	// reverse leaders array
+	let left = 0;
+	let right = leadersArr.length - 1;
+
+	while(left < right){
+		[leadersArr[left], leadersArr[right]] = [leadersArr[right], leadersArr[left]]
+		left++;
+		right--;
+	}
+
+	return leadersArr;
+
+	/**
+	 * TC: O(n) + O(n/2) // iteration + reverse
+	 * SC: O(n)
+	**/
+}
+
+console.log(optimalLeaders([-3, 4, 5, 1, -4, -5])); //output [ 5, 1, -4, -5 ]
