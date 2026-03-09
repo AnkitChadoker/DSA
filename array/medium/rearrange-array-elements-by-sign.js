@@ -65,6 +65,11 @@ function rearrangeElementsBySign(arr){
 	} 
 
 	return arr;
+
+	/** 
+	 * TC: O(n) + O(n/2)
+	 * SC: O(n) // positive + negative
+	**/
 }
 
-console.log(rearrangeElementsBySign([2, 4, 5, -1, -3, -4])); //[2, -1, 4, -3, 5, -4]
+//console.log(rearrangeElementsBySign([2, 4, 5, -1, -3, -4])); //[2, -1, 4, -3, 5, -4]
