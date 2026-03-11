@@ -5,11 +5,11 @@
  * The next permutation of an array of integers is the next lexicographically greater permutation of its integers.
 
 	More formally, if all the permutations of the array are sorted in lexicographical order, then the next permutation of that array is the permutation that follows it in the sorted order.
+
+	If such arrangement is not possible (i.e., the array is the last permutation), then rearrange it to the lowest possible order (i.e., sorted in ascending order).
 	
 	for example if arr = [3,1,2] given then the next permutation will be [3,2,1]
 	and if arr = [3,2,1] is given then the there is no next lexicographically greater permutation available so we fallback to first permutation and answer will be [1,2,3]
-
-	If such arrangement is not possible (i.e., the array is the last permutation), then rearrange it to the lowest possible order (i.e., sorted in ascending order).
 **/
 
 
@@ -29,7 +29,7 @@
 
 
 
-/** OPTIMAL APPROACh **/
+/** OPTIMAL APPROACH **/
 /**
   * we are finding the break point, till where the prefix can be matched.
   * we are then finding the smallest greater element than the break point element to swap with, so we can be as close as possible to the given array.
