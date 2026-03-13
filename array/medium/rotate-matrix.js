@@ -56,4 +56,63 @@ function rotateMatrix(matrix){
 	**/
 }
 
-console.log(rotateMatrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]));
+//console.log(rotateMatrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]));
+
+/*** OPTIMAL APPROACH **/
+
+/** 
+ * 
+ *  	1 2 3     7 4 1
+ * 		4 5 6 =>  8 5 2
+ * 		7 8 9     9 6 3
+ * 
+ * 
+ * if we observe carefully we are just coping the first column and pasting it on the first row and just reversing it like copy [1,4,7] paste it on first row and reverse it [7,4,1]. and same for the othere columns as well.
+ * 
+ * THIS IS CALLED TRANSPOSING THE MATRIX: converting matrix column into rows
+ * 
+ * and once we transposed the entire matrix we can just reverse each row and we will get out result matrix
+ * 		
+ * 		Original  Transposed   Row Reversed (result)  
+ *  
+ *  	1 2 3      1 4 7       7 4 1
+ * 		4 5 6  =>  2 5 8  =>   8 5 2
+ * 		7 8 9      3 6 9       9 6 3
+ * 
+ * 
+ * For transaposing the matrix here are some point we can notice
+ * (i) the diagonals are unchanged [0,0], [1,1], [2,2]....[n-1, n-1], so we do not need to do anything for the diagonals where i === j
+ * 
+ * (ii) There is one more pattern visible if we see we are just swapping the [i][j] with [j][i], like [0][1] was 2 and [1][0] was 4 we just swap them similarly for [0][2] with [2][0] meaning we are just swaping [i][j] with [j][i] and for that we do not need to traverse the entire matrix as well if we just traverse the upper part of the matrix (above the diagonal) and do the swapping we would be able to swap the entire matrix.
+**/
+
+function optimalRotateMatrix(matrix){
+	const n = matrix.length;
+
+	/** transposing the matrix **/
+	for(let i = 0; i < n-1; i++){
+		for(let j = i+1; j < n; j++){
+			[matrix[i][j], matrix[j][i]] = [matrix[j][i], matrix[i][j]];  
+		}
+	}
+
+	/** reverse each row **/
+	for(let i = 0; i < n; i++){
+		let start = 0;
+		let end = n-1;
+		while(start < end){
+			[matrix[i][start], matrix[i][end]] = [matrix[i][end], matrix[i][start]]
+			start++;
+			end--;
+		}
+	}
+
+	return matrix;
+
+	/**
+	 * TC: O(n^2/2) + O(n^2/2) = O(n^2)
+	 * SC: O(1)
+	**/
+}
+
+console.log(optimalRotateMatrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]));
