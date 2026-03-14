@@ -28,7 +28,10 @@
 **/   
 
 
-/** PROBLEM (A) **/
+												
+
+
+												/** PROBLEM (A) **/
 
 /** BRUTE FORCE **/
 /** we can generate the pascals triangle till that row and then return the required column element, we will see how to generate the pascal's triangle in the PROBLEM (C) **/
@@ -85,8 +88,91 @@ function generateNCR(n, r){
 
 function getElementOfPascalTrinagle(row, column){
 	return generateNCR(row-1, column-1);
+	/**
+	 * TC: O(column) // O(r), which is much much much better than the O(n) + O(r) + O(n-r)
+	 * SC: O(1)
+	**/
 }
 
-console.log(getElementOfPascalTrinagle(5,3)) //6
+//console.log(getElementOfPascalTrinagle(5,3)) //6
+
+							
+
+
+
+
+							/*** PROBLE (B) ***/
+/** we will be given a row number and need to return the elements of that perticular row **/
+
+/** BRUTE FORCE **/
+/* we can generate the entire pascal's triangle till that row and return the entire row **/
+
+
+/** BETTER APPROACH **/
+/** we can use the above formula to generate each element of that row and return the row array at the end **/
+
+function betterGetRow(n){
+	const row = [];
+	for(let col = 1; col <= n; col++){
+		const ele = getElementOfPascalTrinagle(n, col);
+		row.push(ele);
+	}
+	return row;
+
+	/**
+	 * TC: O(n * r)
+	 * SC: O(n)
+	**/ 
+}
+//console.log(betterGetRow(6)); // [1,5,10,10,5,1]
+
+
+/** OPTIMAL APROACH **/
+/** 
+ * Instead of calling the get element funciton for each element of the row if we can find a way to not to call it wee can bring down the TC to O(n) 
+ * lets take row 6 for example and try to get each element using the formula iteself
+ * 
+ * 5C0 =   5*4*3*2*1     = 1
+ *       -------------
+ *       1 * 5*4*3*2*1 
+ * 
+ * 
+ * 5C1 =   5*4*3*2*1      1 * 5
+ *        ------------ =      -
+ *         1 * 4*3*2*1        1
+ * 
+ * 
+ * 5C2 =   5*4*3*2*1     1 * 5 * 4
+ *        ------------ =     -   -
+ *         2*1*  3*2*1       1   2
+ * 
+ * 5C3 =   5*4*3*2*1     1 * 5 * 4 * 3
+ *        ------------ =     -   -   -
+ *         3*2*1 * 2*1       1   2   3
+ * 
+ * 
+ * if we see the pattern we are just getting some part added to the ultimate answer each time like 5/1, 4/2 and 3/3 apart from that we are just carring the same answer forward and if we carefully observe this new part is nothing but derived from the row and column itself
+ * 
+ * (i) in the denominator the revised column value itself is being put like 1,2,3 etc.
+ * (ii) and in the numerator we are just subtracting the revised column value from the actual row number (n - c).
+ * 
+ * now lets just using this two fact try to generate the entire row element in O(n) TC.
+**/
+
+function getRow(n){
+	/** since we know that in pascal's tringle first and last element is always 1 that wehy we prefilled the first element as 1 and besides that if we did not do that we need to handle the case for col = 1 explicitly becuase 1-1 would be 0 and 0 in denominator would give us undefined **/
+
+	const row = [1];
+	let answer = 1;
+
+	for(let col = 2; col <= n; col++){
+		const revisedCol = col - 1;
+		answer = answer * (n - revisedCol);
+		answer = answer / revisedCol;
+		row.push(answer);
+	}
+	return row;
+}
+console.log(getRow(6)); // [1,5,10,10,5,1]
 
 
