@@ -21,7 +21,7 @@
 * 	n = 6, output = [1,,5,10,10,5,1] 
 * 
 * c) we are given the row number and we need to return the pascal's tringle till that row, we do not need to print the pattern of pascal triangle instead we need to return the array containing the array of each row like below,
-*   n = 5, output = [[1], [1,1], [1,2,1], [1,3,3,1], [1,5,10,10,5,1]]
+*   n = 5, output = [[1], [1,1], [1,2,1], [1,3,3,1], [1,4,6,4,1]]
 * 
 * 
 * lets start one by one in the above order itself.
@@ -101,7 +101,8 @@ function getElementOfPascalTrinagle(row, column){
 
 
 
-							/*** PROBLE (B) ***/
+							         /*** PROBLE (B) ***/
+
 /** we will be given a row number and need to return the elements of that perticular row **/
 
 /** BRUTE FORCE **/
@@ -172,7 +173,76 @@ function getRow(n){
 		row.push(answer);
 	}
 	return row;
+
+	/**
+	 * TC: O(n)
+	 * SC: O(n)
+	 *  
+	*/
 }
-console.log(getRow(6)); // [1,5,10,10,5,1]
+//console.log(getRow(6)); // [1,5,10,10,5,1]
+
+
+                                                		/** PROBLEM (C) **/
+
+/* 
+generate the entire pascal's triangle till the given row, we need not to print the pattern instead we need to return the array containing the rows array, like:
+	n = 5, output = [[1], [1,1], [1,2,1], [1,3,3,1], [1,4,6,4,1]]
+*/
+
+
+/** SOLUTION 1 **/
+/** we can use the above funtion itself to generate each row and then return the answer array containing each row **/
+
+function pascalTringle(n){
+	const answer = [];
+	for(let i = 1; i<= n; i++){
+		const row = getRow(i);
+		answer.push(row);
+	}
+	return answer;
+
+	/**
+	 * TC: O(n * n)
+	 * SC: O(n * n)
+	**/
+}
+
+console.log(pascalTringle(5)); //[[1], [1,1], [1,2,1], [1,3,3,1], [1,4,6,4,1]]
+
+
+/** SOLUTION 2 **/
+/** Since from the defination of pascals triangle we know that first and second row of the tringle will always be [1], [1,1] and from 3rd row onwards aprat from first and last element the remiainig are the sum of the 2 above elements. lets implement using this defination **/
+
+function pascalTringle2(n){
+	if(n === 1) return [[1]];
+	const answer = [[1], [1,1]];
+	if(n === 2) return answer;	
+
+
+	/** indexing will always start from 0 thats why we starting from 2 beacuse 0 and 1 index has been alloted above **/
+	for(let row = 2; row < n; row++){
+		const rowArr = [];
+		for(let col = 0; col <= row; col++){
+			if(col === 0 || col === row){
+				rowArr.push(1);
+			} else {
+				const sum = answer[row-1][col-1] + answer[row-1][col];
+				rowArr.push(sum);
+			}
+		}
+		answer.push(rowArr);
+	}
+
+	return answer;
+
+	/**
+	 * TC: O(n * n)
+	 * SC: O(n * n)
+	**/
+}
+
+//console.log(pascalTringle2(6)); //[[1], [1,1], [1,2,1], [1,3,3,1], [1,4,6,4,1]]
+
 
 
