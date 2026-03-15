@@ -101,4 +101,59 @@ function betterOptimalMajorityElementII(arr){
 	 * SC: O(n)
 	**/
 }
-console.log(betterOptimalMajorityElementII([1,2,1,1,3,2])); // [1,2]
+//console.log(betterOptimalMajorityElementII([1,2,1,1,3,2,2])); // [1,2]
+
+
+
+														/** OPTIMAL SOLUTION **/
+/** we can use Moore's voting algo. here as well just like Majority element I problem to find the 2 majority element this time. **/
+
+function optimalMajorityElementII(arr){
+	const majority = Math.floor(arr.length / 3);
+
+	let ele1 = undefined; let ele2 = undefined;
+	let count1 = 0; let count2 = 0;
+
+	for(let i = 0; i < arr.length; i++){		
+		if(ele1 === undefined && arr[i] !== ele2){
+			ele1 = arr[i];
+			count1 = 1;
+		} else if(ele2 === undefined && arr[i] !== ele1){
+			ele2 = arr[i];
+			count2 = 1;
+		} else if(ele1 === arr[i]){
+			count1++;
+		} else if(ele2 === arr[i]){
+			count2++;
+		} else {
+			count1--;
+			count2--;
+			if(count1 === 0) ele1 = undefined;
+			if(count2 === 0) ele2 = undefined;
+		}
+	}
+
+	answer = [];
+
+	// verrify the element's majority 
+	count1 = 0; count2 = 0;
+	for(let i = 0; i < arr.length; i++){
+		if(arr[i] === ele1){
+			count1++;
+		} else if(arr[i] === ele2){
+			count2++;
+		}
+	}
+
+	if(count1 > majority) answer.push(ele1);
+	if(count2 > majority) answer.push(ele2);
+
+	return answer;
+
+	/**
+	 * TC: O(n) + O(n)
+	 * SC: O(1) //the array of size 2 is almost constant space
+	**/
+}
+
+console.log(optimalMajorityElementII([1,2,1,1,3,2,2])); // [1,2]
