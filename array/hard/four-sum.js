@@ -46,7 +46,7 @@ function fourSum(arr, target){
 //console.log(fourSum([1, 1, 3, 4, -3], 5))
 
 /** BETTER SOLUTION **/
-/** again similar to three sum, in three sum we were keeping i as static pointer here we are keeping i and j both as static pointer and using k to fing the l. **/
+/** again similar to three sum, in three sum we were keeping i as static pointer here we are keeping i and j both as static pointer and using k to find the l. **/
 
 function betterFourSum(arr, target){
 	const uniqueSet = new Set();
@@ -84,6 +84,7 @@ function betterFourSum(arr, target){
 
 
 /** OPTIMAL SOLUTION **/
+/** similar to three sum problem again, we are just keeping i and j as static pointer and applying the 2 pointer approach on the k and l pointers, everything else remains as it is.**/
 
 function optimalFourSum(arr, target){
 	arr.sort((a,b) => a - b);
@@ -122,4 +123,5 @@ function optimalFourSum(arr, target){
 	**/
 }
 
-console.log(optimalFourSum([1,0,-1,0,-2,2], 0));
+console.log(optimalFourSum([3,4,1,3,2,2,4,5,1,2,3,5,4,1], 8));
+// [1,1,1,2,2,2,3,3,3,4,4,4,5,5]
