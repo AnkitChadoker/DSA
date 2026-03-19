@@ -37,4 +37,36 @@ function LSAwith0(arr){
 	**/
 }
 
-console.log(LSAwith0([1, -1, 0, -2, -1, 0, 2, 1, 1])); //8
+// console.log(LSAwith0([1, -1, 0, -2, -1, 0, 2, 1, 1])); //8
+
+
+
+													/** BETTER SOLUTION **/
+
+/** we can ignore the third loop as we we can get he sum of the elements while generating the sub array itself instead of first generate it and then again loop over it to get the sum **/
+
+function betterLSAwith0(arr){
+	let maxLen = 0;
+
+	for(let i = 0; i < arr.length; i++){
+		let sum = 0;
+
+		for(let j = i; j < arr.length; j++){
+			sum += arr[j];
+
+			if(sum === 0){
+				maxLen = Math.max(maxLen, j - i + 1);
+			}
+		}
+	}
+
+	return maxLen;
+
+	/**
+	 * TC: near about O(n^2)
+	 * SC: O(1)
+	**/
+}
+
+console.log(betterLSAwith0([1, -1, 0, -2, -1, 0, 2, 1, 1])); //8
+
