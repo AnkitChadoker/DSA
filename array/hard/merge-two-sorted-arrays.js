@@ -204,6 +204,7 @@ function optimalMerge(arr1, arr2){
  *
 **/
 
+
 function mergeInPlace(arr1, m, arr2, n){
     let i = m - 1;
     let j = n - 1;

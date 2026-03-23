@@ -1,3 +1,4 @@
+/** BRUTE FORCE **/
 function mergeIntervals(intervals){
 	intervals.sort((a,b) => a[0] - b[0]);
 	const result = [];
@@ -6,7 +7,6 @@ function mergeIntervals(intervals){
 		const currentInterval = intervals[i];
 		for(let j = i + 1; j < intervals.length; j++){
 			if(intervals[j][0] <= currentInterval[1]){
-				currentInterval[0] = Math.min(currentInterval[0], intervals[j][0]);
 				currentInterval[1] = Math.max(currentInterval[1], intervals[j][1]);
 				i = j
 			}
@@ -17,7 +17,25 @@ function mergeIntervals(intervals){
 	return result;
 }
 
-//console.log(mergeIntervals([[1,5],[3,6],[8,10],[15,18]]));
+/** another code **/
+function mergeOverplappingIntervals(intervals){
+	intervals.sort((a,b) => a[0] - b[0]);
+	const result = [];
+	let i = 0;
+	while(i < intervals.length){
+		const currentInterval = intervals[i];
+		let j = i + 1;
+		while(j < intervals.length && intervals[j][0] <= currentInterval[1]){
+			currentInterval[1] = Math.max(currentInterval[1], intervals[j][1]);
+			j++;
+		}
+		i = j;
+		result.push(currentInterval);
+	}
+	return result;
+}
+
+console.log(mergeOverplappingIntervals([[5,7],[1,3],[4,6],[8,10]]));
 
 
 function optimalMergeIntervals(intervals){
@@ -41,4 +59,4 @@ function optimalMergeIntervals(intervals){
 	return result;
 }
 
-console.log(optimalMergeIntervals([[5,7],[1,3],[4,6],[8,10]]));
+//console.log(optimalMergeIntervals([[5,7],[1,3],[4,6],[8,10]]));
