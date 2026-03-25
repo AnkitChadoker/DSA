@@ -94,9 +94,6 @@ function betterFindMissingAndRepeatingNumber(arr, n){
 **/
 
 function optimalFindMissingAndRepeatingNumber(arr, n){
-	let x = undefined;
-	let y = undefined;
-
 	let sumOfN = 0;
 	let sqaureOfN = 0;
 	let sumOfArr = 0;
