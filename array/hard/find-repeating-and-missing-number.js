@@ -90,7 +90,7 @@ function betterFindMissingAndRepeatingNumber(arr, n){
  * 
  * 		B = sum of the square of n natural number - sum of the sqaure of all array elements // X + Y = B
  * 
- * and then after solving this 2 equationwe can get the values of X and Y and then simply iterate over the actual array onec to know which one is missing element and which one is repeating.
+ * and then after solving this 2 equation we can get the values of X and Y and then simply iterate over the actual array onec to know which one is missing element and which one is repeating.
 **/
 
 function optimalFindMissingAndRepeatingNumber(arr, n){
@@ -110,8 +110,8 @@ function optimalFindMissingAndRepeatingNumber(arr, n){
 	let A = sumOfN - sumOfArr; // X - Y = A
 	let B = (sqaureOfN - sqaureOfArr) / A; // (X^2 - Y^2) = (X + Y)(X - Y) , :: [(X^2 - Y^2) / (X - Y)] => X + Y = B
 
-	x = (A + B)/2; // A + B = (X + Y) + (X - Y) => A + B = 2X => X = (A + B / 2), where A = X + Y, B = X - Y
-	y = (B - A)/2; // B - A = (X + Y) - (X - Y) => B - A = 2Y => Y = (B - A)/ 2), where A = X + Y, B = X - Y
+	x = (A + B)/2; // A + B = (X - Y) + (X + Y) => A + B = 2X => X = (A + B / 2), where A = X - Y, B = X + Y
+	y = (B - A)/2; // B - A = (X + Y) - (X - Y) => B - A = 2Y => Y = (B - A)/ 2), where A = X - Y, B = X + Y
 
 
 	/** to check which is repeating and which is missing between both x and y **/
