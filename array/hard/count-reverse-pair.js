@@ -39,10 +39,15 @@ function reversePair(arr){
 
 											/** OPTIMAL SOLUTION **/
 
-/** same as count inversion problem, we are gonna use the merge sort algo., but here is slight change instead of i > j we need to find the i > 2 * j, but in our merge sort algo. we have the condition where we check arr[i] > arr[j] and we can not directly change that condition to arr[i] > 2 * arr[j], becuase the entire merging is happening becuase of that condition, if we try to twick that the entire alog. would fall apart. **/
+/** same as count inversion problem, we are gonna use the merge sort algo., but here is slight change instead of i > j we need to find the i > 2 * j, but in our merge sort algo. we have the condition where we check arr[i] > arr[j] and we can not directly change that condition to arr[i] > 2 * arr[j], becuase the entire merging is happening becuase of that condition, if we try to twick that the entire algo. would fall apart. that why we will count the reverse pair separatley before merging the arrays. **/
 
 function optimalReversePair(arr){
 	return mergeSort(arr);
+
+	/**
+	 * TC: O(n * logn)
+	 * SC: O(n)
+	**/
 }
 
 console.log(optimalReversePair([5, 4, 4, 3, 3]));
