@@ -28,7 +28,7 @@ function searchElementInSortedArray(arr, target){
 
 	return -1;
 	/**
-	 * TC: O(logn) // we are keep cutting the array into half at each iteration
+	 * TC: O(logn) // we are keep cutting down the array into half at each iteration
 	 * SC: O(1)
 	**/
 }
