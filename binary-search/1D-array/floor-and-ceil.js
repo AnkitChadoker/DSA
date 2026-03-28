@@ -30,9 +30,9 @@ function findFloorAndCeil(arr, x){
 		if(arr[i] === x) {
 			return [x, x];
 		} else if (arr[i] < x){
-			floor = floor === undefined ? arr[i] : Math.max(floor, arr[i]);
+			floor = arr[i];
 		} else {
-			ceil = ceil === undefined ? arr[i] : Math.min(ceil, arr[i]);
+			ceil = arr[i];
 		}
 		if(floor && ceil) return [floor, ceil];
 	}
@@ -45,7 +45,7 @@ function findFloorAndCeil(arr, x){
 	**/
 }
 
-//console.log(findFloorAndCeil([3, 4, 4, 7, 8, 10], 5));
+//console.log(findFloorAndCeil([3, 4, 4, 7, 8, 10], 9));
 
 															//** OPTIMAL APPROACH **/
 
@@ -60,10 +60,10 @@ function optimalFindFloorAndCeil(arr, x){
 
 		if(arr[mid] === x) return [x, x];
 		else if(arr[mid] < x) {
-			floor = floor === undefined ? arr[mid] : Math.max(floor, arr[mid]);
+			floor = arr[mid];
 			left = mid + 1;
 		} else {
-			ceil = ceil === undefined ? arr[mid] : Math.min(ceil, arr[mid]);
+			ceil = arr[mid];
 			right = mid - 1;
 		}
 	}
@@ -72,4 +72,4 @@ function optimalFindFloorAndCeil(arr, x){
 }
 
 
-console.log(optimalFindFloorAndCeil([2, 4, 6, 8, 10, 12, 14], 1));
+//console.log(optimalFindFloorAndCeil([2, 4, 6, 8, 10, 12, 14], 15));

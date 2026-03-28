@@ -18,9 +18,9 @@ function searchInsertPosition(arr, target){
 
 	while(left <= right){
 		const mid = Math.floor((left + right) / 2);
-		if(arr[mid] === target) return mid;
-		else if(arr[mid] > target){
-			index = Math.min(mid, index);
+		
+		if(arr[mid] >= target){
+			index = mid;
 			right = mid - 1;
 		} else {
 			left = mid + 1;

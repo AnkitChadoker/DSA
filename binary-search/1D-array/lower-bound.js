@@ -23,10 +23,9 @@ function lowerBound(arr, target){
 	while(left <= right){
 		const mid = Math.floor((left + right) / 2);
 
-		if(arr[mid] === target) return mid;
-		else if(arr[mid] > target){
-			// we need minimum index where element is greater than target, becuase eqaul case is handled in if() statement, so we are just checking for the greater element which is at smallest index.
-			LB  = Math.min(LB, mid); 
+		if(arr[mid] >= target){
+			// we need minimum index where element is greater than or equal to target, so we are just keep on checking for the element which is at smallest index.
+			LB  = mid; 
 			right = mid - 1;
 		} else {
 			left = mid + 1;

@@ -24,7 +24,7 @@ function upperBound(arr, target){
 
 		if(arr[mid] > target){
 			// we need minimum index where element is greater than target, so we are just checking for the greater element which is at smallest index.
-			UB = Math.min(UB, mid);
+			UB = mid
 			right = mid - 1;
 		} else {
 			left = mid + 1;
