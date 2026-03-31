@@ -72,4 +72,4 @@ function optimalFindMin(arr){
 	**/
 }
 
-console.log(optimalFindMin([4, 5, 6, 7, 0, 1, 2, 3])); // 0
+//console.log(optimalFindMin([4, 5, 6, 7, 0, 1, 2, 3])); // 0
