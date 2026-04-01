@@ -89,6 +89,11 @@ function optimalFindPeak(arr){
 
 	return -1;
 
+	/**
+	 * TC: O(logn)
+	 * SC: O(1)
+	**/
+
 }
 
 console.log(optimalFindPeak([1, 2, 3, 4, 5, 6, 7, 8, 5, 1])); // 7
