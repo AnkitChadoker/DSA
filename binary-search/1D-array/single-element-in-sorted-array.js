@@ -87,10 +87,10 @@ function optimalSingleNonDuplicate(arr){
 		/** checking for even-odd pattern, if current index is at even index we check the next element if it's also the same to follow the (e-o pattern) and if the current index is at odd pattern we check the previous element if it's the same (e-o pattern) **/
 		if((mid % 2 === 0 && arr[mid] === arr[mid + 1]) || (mid % 2 === 1 && arr[mid - 1] === arr[mid])){
 
-			/** if pattern follows we will not the element in the left half so we move low to mid + 1 **/
+			/** if pattern follows we will not find the element in the left half so we move low to mid + 1 **/
 			low = mid + 1;
 		} else {
-			
+
 			/** if the e-o pattern is not being followed our target should be at the left half thats why the pattern matching is disrupted. **/
 			high = mid - 1;
 		}
