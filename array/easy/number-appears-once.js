@@ -1,4 +1,4 @@
-/** we are given an array and we nee dto find the element which appear only once and all the remaining elements would be appearing twice **/
+/** we are given an array and we need to find the element which appear only once and all the remaining elements would be appearing twice **/
 
 /**
 	arr = [1,2,4,1,2]
