@@ -42,6 +42,63 @@ function sqrt(n){
 		}
 	}
 	return ans;
+	/**
+	 * TC: O(n)
+	 * SC: O(1)
+	**/
 }
 
-console.log(sqrt(28)); //5
+//console.log(sqrt(28)); //5
+
+
+/** OPTIMAL APROACH **/
+/** since we now have a certain range from 1 to n that too sorted and and we need to find a number whose square is less than or equal to n, so we can apply the binary search here and take the low as 1 ang high as n and get the mid and if the mid's square is smaller than or eqaul to the n we register the number as answer and now we need to look for posible bigger answer (because we need to find the number such that the number should be the greatest number whose sqaure should be less than equal to n.) so we move the low to mid + 1 (eliminate left half, since we have registered mid as answer all the number before mid will definately have the smaller sqaure so no need to check for them we can safely eliminate them) and do the same process and if the mid's sqaure is greater than the n we move the high to mid - 1, becuase we will all the greater sqaure from mid onwards so we need to eliminate the  right half. **/
+
+
+/**
+ * If we pay attention carefully we do not even need to carry this extra answer variable and we can just return the high as our answer why ??
+ * 
+ * low is pointing to the answer candidate since begining meaning 1 could have also been the answer (becuase 1 * 1 <= any positive number) and high was pointing to the max posible number which we take as n, now we keep on shrinking the array by eliminating half the array at each iteration, like lets say for 28 :
+ * 
+ * (i) low = 1, high = 28, mid = 14
+ * 			is 14 * 14 <= 28, no so we eliminate the right half because no way we are gonna get any number bigger than 14 which has sqaure less than or eqaul to 28.
+ * 
+ * (ii) low = 1, high = 13, mid = 7
+ * 			is 7 * 7 <= 28, no so again eliminate right half.
+ * 
+ * (iii) low = 1, high = 6, mid = 3
+ * 			is 3 * 3 <= 28, yes so we can for now register this mid as our answer (in separate variable to compare with high later on, so answer = 3), but we can still look for greater number as we have some elements left in the range so we go right by eliminating left this time.
+ * 
+ * (iv) low = 4, high = 6, mid = 5
+ * 			is 5 * 5 <= 28, yes we got greater element so we replace answer with this mid (answer = 5), now we will look for even bigger number if possible so we go right again.
+ * 
+ * (v) low = 6, high = 6, mid = 6
+ * 			is 6 * 6 <= 28, no so we go left this time, we did not register the answer becuase its greater than the n,
+ * 
+ * (vi) low = 6, high = 5
+ * 			and now both the pointers crossed each other meaning we are out of the loop and high is pointing to the 5 which was our registered answer, so initially low was pointing to the answer and at the end high pointing to the answer this is called change of polarity, so we can return the high at the end as well becuase high will only represent the answer after crossing the low (polarity chnage) so we can safely return that. 
+ * 
+**/
+
+function optimalSqrt(n){
+	let low = 1;
+	let high = n;
+	let answer = 1;
+
+	while(low <= high){
+		const mid = Math.floor((low + high) / 2);
+		if(mid * mid <= n){
+			answer = mid;
+			low = mid + 1;
+		} else {
+			high = mid - 1;
+		}
+	}
+	return answer; // high
+	/**
+	 * TC: O(logn)
+	 * SC: O(1)
+	**/
+}
+
+console.log(optimalSqrt(51)); //7
