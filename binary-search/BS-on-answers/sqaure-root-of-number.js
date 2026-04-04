@@ -76,7 +76,7 @@ function sqrt(n){
  * 			is 6 * 6 <= 28, no so we go left this time, we did not register the answer becuase its greater than the n,
  * 
  * (vi) low = 6, high = 5
- * 			and now both the pointers crossed each other meaning we are out of the loop and high is pointing to the 5 which was our registered answer, so initially low was pointing to the answer and at the end high pointing to the answer this is called change of polarity, so we can return the high at the end as well becuase high will only represent the answer after crossing the low (polarity chnage) so we can safely return that. 
+ * 			and now both the pointers crossed each other meaning we are out of the loop and high is pointing to the 5 which was our registered answer, so initially low was pointing to the answer and at the end high pointing to the answer this is called change of polarity, so we can return the high at the end as well becuase high will only represent the answer after crossing the low (polarity change) so we can safely return that. 
  * 
 **/
 
