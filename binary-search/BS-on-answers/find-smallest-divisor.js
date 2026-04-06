@@ -41,7 +41,8 @@ function getDividedSum(arr, divisor, limit){
 	return sum <= limit;
 }
 
-/** BRUTE FORCE **/
+					/** BRUTE FORCE **/
+/** same approach as minimum days to make M bouquests **/
 
 function smallestDivisor(arr, limit){
 	const max = Math.max(...arr);
@@ -57,4 +58,29 @@ function smallestDivisor(arr, limit){
 	**/
 }
 
-console.log(smallestDivisor([1, 2, 3, 4, 5], 8)); //3
+//console.log(smallestDivisor([1, 2, 3, 4, 5], 8)); //3
+
+
+					/** OPTIMAL **/
+/** same approach as minimum days to make M bouquests **/
+
+function optimalSmallestDivisor(arr, limit){
+	let max = Math.max(...arr);
+	let min = 1;
+	while(min <= max){
+		const mid = Math.floor((min + max) / 2);
+		if(getDividedSum(arr, mid, limit)) {
+			max = mid - 1;
+		} else {
+			min = mid + 1;
+		}
+	}
+	return min;
+
+	/**
+	 * TC: O(max * logn)
+	 * SC: O(1)
+	**/
+}
+
+console.log(optimalSmallestDivisor([1, 2, 3, 4, 5], 8)); //3
