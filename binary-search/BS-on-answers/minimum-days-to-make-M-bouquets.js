@@ -76,11 +76,12 @@ function countBouquets(day, arr, k, m) {
 }
 
 								/** BRUTE FORCE **/
+
 /* we can start checking for each day of our identified range and check can we make the M bouquets on the that day. and as soon as we find the day we return the answer, because that will be our min day. */
 
 function roseGarder(arr, k, m){
 	/** check for the edge case, is it even possible to make M bouquests out of given flowers */
-	if(arr.length * k < m) return -1;
+	if(arr.length < k * m) return -1;
 
 	let min = Math.min(...arr);
 	let max = Math.max(...arr);
@@ -96,4 +97,40 @@ function roseGarder(arr, k, m){
 	**/
 }
 
-console.log(roseGarder([7, 7, 7, 7, 13, 11, 12, 7], 3, 2));
+//console.log(roseGarder([7, 7, 7, 7, 13, 11, 12, 7], 3, 2));
+
+
+								/** OPTIMAL APPROACH **/
+
+/** again we have a range which is sorted and we need to find a min. possible integer between this range so we can surely use binary search for that. we can use opposite polarity concept here as well and avoid the extra variable to carry the answer (reference: koko eating banana problem) **/
+
+function optimalRoseGarder(arr, k, m){
+	if(arr.length < k * m) return -1;
+
+	let min = Math.min(...arr);
+	let max = Math.max(...arr);
+
+	/** avoid it **/
+	let answer = max;
+
+	while(min <= max){
+		const mid = Math.floor((min + max) / 2);
+		if(countBouquets(mid, arr, k , m)){
+			answer = mid;
+
+			// even after finding the day, keep on finding for more smaller day
+			max = mid - 1;
+		} else {
+			min = mid + 1;
+		}
+	}
+	return min; // answer
+
+	/**
+	 * TC: O(max - min + 1) * O(logn)
+	 * SC: O(1)
+	**/
+}
+
+
+console.log(optimalRoseGarder([7, 7, 7, 7, 13, 11, 12, 7], 3, 2));
