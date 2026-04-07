@@ -97,6 +97,11 @@ function shipWithinDays(weights, days){
 	}
 
 	return -1;
+
+	/**
+	 * TC: O(max - min + 1) * O(n)
+	 * SC: O(1)
+	**/
 }
 
 //console.log(shipWithinDays([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5)) // 15
@@ -132,6 +137,11 @@ function optimalShipWithinDays(weights, days){
 	}
 	// using opposite polarity concept.
 	return minCapacity;
+
+	/**
+	 * TC: O(max - min + 1) * O(logn)
+	 * SC: O(1)
+	**/
 }
 
 
