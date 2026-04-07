@@ -130,7 +130,7 @@ function optimalShipWithinDays(weights, days){
 			minCapacity = mid + 1;
 		}
 	}
-
+	// using opposite polarity concept.
 	return minCapacity;
 }
 
