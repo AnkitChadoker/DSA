@@ -14,6 +14,8 @@ In no manner can we increase the minimum distance beyond 3.
 * Explanation: The maximum possible minimum distance between any two cows will be 5 when 2 cows are placed at positions [1, 6]. 
 **/
 
+/** INTUITION **/
+
 function canWePlaceKCows(arr, distance, k){
 	let placed = 1;
 	let lastStall = arr[0];
@@ -27,7 +29,9 @@ function canWePlaceKCows(arr, distance, k){
 	return placed >= k;
 }
 
-/** BRUTE FORCE **/
+													
+													/** BRUTE FORCE **/
+
 function aggresiveCows(arr, k){
 	arr.sort( (a, b) => a - b);
 
@@ -38,10 +42,17 @@ function aggresiveCows(arr, k){
 	for(let i = min; i <= max; i++){
 		if(canWePlaceKCows(arr, i, k)){
 			answer = i;
+		} else {
+			break;
 		}
 	}
 
 	return answer;
+
+	/**
+	 * TC: O(nlogn) * O(max) * O(n)
+	 * SC: O(1)
+	**/
 }
 
-console.log(aggresiveCows([4, 2, 1, 3, 6], 2)) // 5
+console.log(aggresiveCows([0, 3, 4, 7, 10, 9], 4)) // 3
