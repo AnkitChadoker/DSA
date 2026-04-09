@@ -31,23 +31,21 @@
  * 
  *          student A          student B
  * 
- * (i)    12     => [12]     34, 67, 90 => [191]
- * (ii)   12, 34 => [46]     67, 90     => [157]
- * (iii)  12, 34, 67 => [113]  90       => [90] 
+ * (i)    12         => [12]     34, 67, 90   => [191]
+ * (ii)   12, 34     => [46]         67, 90   => [157]
+ * (iii)  12, 34, 67 => [113]            90   => [90] 
  * 
  * there are no other way possible to allocate this n books among m students by following the previous written conditions.
  * 
  * we need the way such that the max allocation to a student should be minimal and out of the three ways (iii) way is giving us the allocation such that, because in (i) the maximum allocation was 191 and in (ii) it was 157 and compare to these 2, (iii) has given us minimal (113) possible allocation.
  * 
- * From the above allocation system we can see that any student can get 
- * at least min of the books, at least that must have to be assigned to any 
- * student, like it was 12 in our case.
+ * From the above allocation system we can see that the book with max page is 90 and since we need to allote at least one book to each student so there has to be a student who will be alloted this book with the highest number of pages, so its obvious our answer can not go lower than at, because it has to be alloted so the min answer would be that must at least, so our lower bound will be the max. ele. of the array.
  * 
  * and suppose the students number would be 1 (m=1), so all the books will be 
  * assigned to the single student only, so the max allocation can be the 
  * summation of all books.
  * so these way we have our range of allocation (search space) from 
- * min. of array to summation of array (12 to 203).
+ * min. of array to summation of array (90 to 203).
 **/
 
 
@@ -81,7 +79,7 @@ function canBeAllocated(arr, limit, m){
 function bookAllocation(arr, m){
   if(arr.length < m) return -1;
 
-  let min = Math.min(...arr);
+  let min = Math.max(...arr);
   let max = arr.reduce( (pages, sum) => sum + pages, 0);
 
   for(let limit = min; limit <= max; limit++){
@@ -104,65 +102,59 @@ function bookAllocation(arr, m){
 									/** OPTIMAL SOLUTION **/
 
 /**
- * we have our search space which is sorted, starting onwards min. of array, and we need to find a possible max. integer which 
+ * we have our search space which is sorted, starting onwards max. of array, and we need to find a possible max. integer which 
  * allows the allocations. we can do dry run of it so it can be understandable easily.
  * 
  *   arr = [12, 34, 67, 90]
- * limit = [12, 13, 14, 15, ......., 201, 202, 203]
- *          low                                high
+ * limit = [90, 91 ......., 201, 202, 203]
+ *          low                       high
  * 				
- * 					(i) mid = (203 + 12) / 2 = 107
+ * 					(i) mid = (203 + 90) / 2 = 146
  * 					
  * 					canBeAllocated(arr, 107, 2)
- * 					Student 1: 12 + 34 = 46
- * 					Student 2: 67
- * 					Student 3: 90
+ * 					Student 1: 12 + 34 + 67 = 113
+ * 					Student 2: 90
  * 
- * we need 3 students to allocate all books using 107 as a limit, we need to increase limit so we go right and eliminate left half.
+ * yes we were able to allocate books to 2 students using limit as 146, for now we record the limit as one of our answer, and look for even smaller number, because we need the max possible min integer.
  * 
- * 			low = 108, high = 203
- * 			(ii) mid = (108 + 203) / 2 = 155
+ * 			low = 145, high = 203
+ * 			(ii) mid = (90 + 145) / 2 = 117
  * 
- * check using 155:
- * 			Student 1: 12 + 34 + 67 = 113 < 155
- * 			Student 2: 90 < 155
- * yes we were able to allocate books to 2 students using limit as 155, for now we record the limit as one of our answer, and look for even smaller number, because we need the max possible min integer.
+ * check using 117:
+ * 			Student 1: 12 + 34 + 67 = 113 < 117
+ * 			Student 2: 90 < 117
+ * yes we were able to allocate books to 2 students using limit as 117, for now we record the limit as one of our answer, and look for even smaller number, because we need the max possible min integer.
  * 
- * 			 low = 108, high = 154
- * 			 (iii) mid = (108 + 154) / 2 = 131
+ * 			 low = 90, high = 116
+ * 			 (iii) mid = (90 + 116) / 2 = 103
  *			 
- * 			 Student 1: 12 + 34 + 67 = 113 < 131
- * 			 Student 2: 90 < 131
- * again possible so we register 131 as our new answer and go even smaller.
+ * 			 Student 1: 12 + 34 = 46 < 103
+ * 			 Student 2: 67 < 103
+ * 			 Student 3: 90 < 103
+ * not possible, go bigger.
  * 
- * 			low = 108, high = 130
- * 			(iv) mid = (108 + 130) / 2 = 119
- * 			Student 1: 12 + 34 + 67 = 113 <= 119
- * 			Student 2: 90 <= 119
- * new answer = 119, go even smaller.
+ * 			low = 104, high = 116
+ * 			(iv) mid = (104 + 116) / 2 = 110
+ **			 Student 1: 12 + 34 = 46 < 110
+ * 			 Student 2: 67 < 110
+ * 			 Student 3: 90 < 110
+ * not possible, go bigger.
  * 
- * 			low = 108, high = 118
- * 		    (v) mid = (108 + 118) / 2 = 113
+ * 			low = 111, high = 116
+ * 		    (v) mid = (111 + 116) / 2 = 113
  * 			Student 1: 12 + 34 + 67 = 113 <= 113
  * 			Student 2: 90 <= 113
  * new answer = 113, go even smaller.
  * 
- * 			low = 108, high = 112
- * 		   (vi) mid = (108 + 112) / 2 = 110
- * 			Student 1: 12 + 34 = 46 <= 110
- * 			Student 2: 67 <= 110
- * 			Student 3: 90 <= 110
- * not possible, go bigger.
- * 
  * 			low = 111, high = 112
- * 		    (vii) mid = (111 + 112) / 2 = 111
+ * 		   (vi) mid = (111 + 112) / 2 = 111
  * 			Student 1: 12 + 34 = 46 <= 111
  * 			Student 2: 67 <= 111
  * 			Student 3: 90 <= 111
  * not possible, go bigger.
  * 
  * 			low = 112, high = 112
- * 		    (viii) mid = (112 + 112) / 2 = 112
+ * 		    (vii) mid = (112 + 112) / 2 = 112
  * 			Student 1: 12 + 34 = 46 <= 112
  * 			Student 2: 67 <= 112
  * 			Student 3: 90 <= 112
@@ -175,7 +167,7 @@ function bookAllocation(arr, m){
 function optimalBookAllocation(arr, m){
 	if(arr.length < m) return -1;
 
-	let min = Math.min(...arr);
+	let min = Math.max(...arr);
 	let max = arr.reduce( (page, sum) => sum + page, 0);
 
 	while(min <= max){
