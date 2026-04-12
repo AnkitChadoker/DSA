@@ -120,4 +120,51 @@ function betterMedian(arr1, arr2){
 	**/
 }
 
-console.log(betterMedian([2, 4, 6], [1, 3, 5])); // 3.5
+//console.log(betterMedian([2, 4, 6], [1, 3, 5])); // 3.5
+
+
+
+												/** OPTIMAL SOLUTION **/
+
+function median(arr1, arr2){
+	if(arr2.length < arr1.length) return median(arr2, arr1);
+
+	let m = arr1.length;
+	let n = arr2.length;
+
+	let low = 0;
+	let high = m;
+
+	while(low <= high){
+		const mid1 = Math.floor((low + high) / 2);
+		const mid2 = Math.floor((m + n + 1) / 2) - mid1;
+
+		let left1 = mid1 === 0 ? -Infinity : arr1[mid1 - 1];
+		let left2 = mid2 === 0 ? -Infinity : arr2[mid2 - 1];
+
+		let right1 = mid1 === m ? Infinity : arr1[mid1];
+		let right2 = mid2 === n ? Infinity : arr2[mid2];
+
+		if(left1 <= right2 && left2 <= right1){
+			if((m + n) % 2 === 0){
+				return (Math.max(left1, left2) + Math.min(right1, right2)) / 2;
+			} else {
+				return Math.max(left1, left2);
+			}
+		} else if(left1 > right2){
+			high = mid1 - 1;
+		} else {
+			low = mid1 + 1;
+		}
+	}
+
+	return undefined;
+
+	/**
+	 * TC: O(log(min(m, n)))
+	 * SC: O(1)
+	**/
+}
+
+console.log(median([2, 4, 6], [1, 3])); // 3.5
+
