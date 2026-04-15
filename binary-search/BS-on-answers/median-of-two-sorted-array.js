@@ -103,6 +103,7 @@ function betterMedian(arr1, arr2){
 			midSum += arr1[i];
 		}
 		i++;
+		count++;
 	}
 
 	while(j < arr2.length){
@@ -110,6 +111,7 @@ function betterMedian(arr1, arr2){
 			midSum += arr2[j];
 		}
 		j++;
+		count++;
 	}
 
 	return totalLenght % 2 === 0 ? midSum / 2 : midSum;
@@ -120,7 +122,7 @@ function betterMedian(arr1, arr2){
 	**/
 }
 
-//console.log(betterMedian([2, 4, 6], [1, 3, 5])); // 3.5
+//console.log(betterMedian([2, 3, 4, 5, 6], [1])); // 3.5
 
 
 
@@ -166,5 +168,5 @@ function median(arr1, arr2){
 	**/
 }
 
-console.log(median([2, 4, 6], [1, 3])); // 3.5
+//console.log(median([2, 4, 6], [1, 3])); // 3.5
 
