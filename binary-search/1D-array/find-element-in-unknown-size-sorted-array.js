@@ -70,7 +70,9 @@ function optimalFindElementInUnknownSize(reader, target){
 	let low = 0;
 	let high = 1;
 
-	/** to find the range to apply BS on, TC: O(logn) **/
+	/** to find the range to apply BS on, TC: O(logn) 
+	 * we are just expanding the search by double each time by eliminating the previous half of the array each time we are doind low = high and high = 2 * high, meaning we are justt eliminating previoud array range, this way this is also an O(logn) operation just like bottom up BS, in normal BS we shirk down the array by half here we are expanding the array by double 
+	**/
 	while(reader.get(high) <= target){
 		low = high;
 		high = 2 * high;
