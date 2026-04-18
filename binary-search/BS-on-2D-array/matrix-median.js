@@ -51,7 +51,7 @@ console.log(findMedian([ [1, 3, 8], [2, 3, 4], [1, 2, 5] ])); //3
  * 		
  * arr = [1, 1, 2, 2, 3, 4, 5, 8], mid = arr[floor(8/2)] => arr[4] => 3
  * 
- * mid is nothing but the first element which has more than (arr.length / 2) elements, less than or equal to it in the array, like here 3 has 5 elements which were less than or equal to it in the array, though 4, 5, and 8 also have more than (arr.length / 2) elements which are less than or eqaul to them, but mid is the first element of the array which satisfies this condition.
+ * mid is nothing but the first element which has more than (arr.length / 2) elements, which are less than or equal to it in the array, like here 3 has 5 elements which were less than or equal to it in the array, though 4, 5, and 8 also have more than (arr.length / 2) elements which are less than or eqaul to them, but mid is the first element of the array which satisfies this condition.
  * 
  * if we see previous elements than 3, 2 had only 4 elements which are less than or equal to 2, but we need more than (arr.length / 2) elements to be less than or eqaul to mid and 3 is that element.
  * 
@@ -110,7 +110,7 @@ function upperBound(arr, target){
 	let low = 0;
 	let high = arr.length - 1;
 	let ans = arr.length;
-	
+
 	while(low <= high){
 		const mid= Math.floor((low + high)/2);
 		if(arr[mid] > target){
