@@ -14,6 +14,8 @@
  * 
 **/
 
+
+
 								/** BRUTE FORCE **/
 /**
  * we can scan through entire array and check each element if its equal to target and return true if we find the target otherwise return false at the end.
