@@ -55,4 +55,54 @@ function reverseWordsInString(string){
 	**/
 }
 
-console.log(reverseWordsInString("the sky is blue"))
+//console.log(reverseWordsInString("the sky is blue"));
+
+
+												
+												/** OPTIMAL SOLUTION **/
+
+/** 
+ * Instead of iterating over the string and then storing each word into and array and then reverse it and join it, we can start from behind since we need reverse of the string so we can start from behind downwards, we can just pluck the word and put it into our result variable and to negate the spaces we can use another while loop to just eliminate the extra spaces.
+**/
+
+function optimalReverseWordsInString(string){
+	let answer = '';
+	let index = string.length - 1;
+	
+	while(index >= 0){
+		/** eliminate the white spaces **/
+
+		while(string[index] === " " && index >= 0){
+			index--;
+		}
+
+		if(index < 0) break;
+
+		/** mark the index as end point of substring after eliminating the extra spaces **/
+		const end = index;
+
+		/** start iterating between the valid word range **/
+		while(string[index] !== " " && index >= 0){
+			index--;
+		}
+
+		/** extract the word **/
+		const word = string.substring(index + 1, end + 1);
+
+		/** if we already have any word in the answer we need to add a single white space before each new word insertion **/
+		if(answer.length > 0) answer += " ";
+
+		/** append the new word into answer **/
+		answer += word;
+	}
+
+	return answer;
+
+	/**
+	 * TC: O(n * // some constant substring but this will be very minimal so can be ignored.)
+	 * SC: O(1)
+	**/
+}
+
+
+console.log(optimalReverseWordsInString("the sky is  blue"));
