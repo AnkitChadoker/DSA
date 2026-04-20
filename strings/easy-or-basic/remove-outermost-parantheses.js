@@ -34,7 +34,7 @@
 
 					
 
-					/** BRUTE FORCE **/
+													/** BRUTE FORCE **/
 
 /** we can iterate through the string, and can use a array stack to store the parantheses, if its the open parantheses we check in the stack if we already have some elements in the array then only we add this current parantheses into our answer string, becuase we do not want the outer most parantheses so we need to ignore the first opening of any valid paranthesisation and if we encounter any closing parantheses (since its valid parentheses string meaning there will be no sudden open and closing parantheses) we pop out the last opening parantheses from the array and still stack has some data we append the current parantheses to the answer.  **/
 
@@ -64,4 +64,33 @@ function removeParantheses(string){
 	**/
 }
 
-console.log(removeParantheses("(()())(())(()(()))"));
+//console.log(removeParantheses("(()())(())(()(()))"));
+
+
+													/** OPTIMAL SOLUTION **/
+
+/** Actually we do not need to maintain the entire array to keep track of parantheses, since the problem itself says that the string will always be a valid paranthesis so we can just keep the track using a counter method only. for every openinig parantheses we can increase the count and for each closing parantheses we can descrese the count. **/
+
+function optimalRemoveParantheses(string){
+	let count = 0;
+	let answer = '';
+
+	for(str of string){
+		if(str === '('){
+			if(count) answer += str;
+			count++;
+		} else {
+			count--;
+			if(count) answer += str;
+		}
+	}
+
+	return answer;
+
+	/**
+	 * TC: O(n)
+	 * SC: O(1)
+	**/
+}
+
+console.log(optimalRemoveParantheses("()"));
