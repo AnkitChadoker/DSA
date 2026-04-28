@@ -46,6 +46,41 @@ function frequencySort(string){
 	characters.sort( (a, b) => freqMap[a] !== freqMap[b] ? freqMap[b] - freqMap[a] : a.localeCompare(b));
 
 	return characters;
+
+	/**
+	 * TC: O(n) + O(n * logn)
+	 * SC: O(n)
+	**/
 }
 
-console.log(frequencySort("raaaajj")); //['a' , 'j', 'r' ]
+// console.log(frequencySort("raaaajj")); //['a' , 'j', 'r' ]
+
+
+/** variant 2 : instead of returning array like ['a' , 'j', 'r' ] return "aaaajjr" **/
+function frequencySortII(string){
+	const freqMap = {};
+
+	for(let char of string){
+		freqMap[char] = freqMap[char] ? freqMap[char] + 1 : 1;
+	}
+
+	const characters = Object.keys(freqMap);
+
+	characters.sort( (a, b) => freqMap[a] !== freqMap[b] ? freqMap[b] - freqMap[a] : a.localeCompare(b) );
+
+	let ans = "";
+
+	for(let i = 0;  i < characters.length; i++){
+		ans += characters[i].repeat(freqMap[characters[i]]);
+	}
+
+	return ans;
+
+
+	/**
+	 * TC: O(n) + O(n * logn)
+	 * SC: O(n)
+	**/
+}
+
+console.log(frequencySortII("tree")); // "eert" OR "eetr"
