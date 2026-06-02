@@ -30,7 +30,7 @@
 											/** INTUITION **/
 
 /**
- * first and formost thing if two strings are to be isomorphic they has be of same size, like egg and egg are isomorphic by default becase if we replace each word with its corresponsind word in the other string we would still get the same string "egg", so same strings will always be a isomorphic string
+ * first and formost thing if two strings are to be isomorphic they has be of same size, like egg and egg are isomorphic by default becase if we replace each word with its corresponsing character in the other string we would still get the same string "egg", so same strings will always be a isomorphic string
  * 
  * 		e g g
  * 		e g g
@@ -40,14 +40,14 @@
  * 		e g g  => a d d
  * 		a d d
  * 
- * if we try to replace first string character by character using second string, like e gets replaced by the a and g will be replaced by d, so yes the "egg" will be completely replaced by "add".
+ * if we try to replace first string character by character using second string, like "e" gets replaced by the "a" and "g" will be replaced by "d", so yes the "egg" will be completely replaced by "add".
  * 
  * now lets say instead of add we have aid.
  * 
  * 		e g g
  * 		a i d
  * 
- * now we start from the begining again e will be replaced by the a, g will be replaced by the i, and now we are trying to replace another g by the charater d, which is wrong, because the problem itself stated that "No two characters may map to the same character", so since g was already mapped to i previously it can not be mapped to another character in the future and if it happens that means the strings are not isomorphic. 
+ * now we start from the begining again "e" will be replaced by the "a", "g" will be replaced by the "i", and now we are trying to replace another "g" by the charater "d", which is wrong, because the problem itself stated that "No two characters may map to the same character", so since "g" was already mapped to "i" previously it can not be mapped to another character in the future and if it happens that means the strings are not isomorphic. 
  * 
  *  Here we are just mapping the character of both strings like e -> a, g -> i etc.
  * 
@@ -61,7 +61,7 @@
  * 
  * 		a -> e, i -> g, d -> g
  * 
- * though we have the duplicate mapping of g but we could not track it using one way mapping ( s to t), thats why we use maping both ways (t to s also).
+ * though we have the duplicate mapping of "g" but we could not track it using one way mapping ( s to t), thats why we use maping both ways (t to s also).
  * 
  * 		e -> a, g -> i, g -> d
  * 	
