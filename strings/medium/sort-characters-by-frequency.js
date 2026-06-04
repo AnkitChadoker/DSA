@@ -48,7 +48,7 @@ function frequencySort(string){
 	return characters;
 
 	/**
-	 * TC: O(n) + O(n * logn)
+	 * TC: O(n) + O(k * logk)
 	 * SC: O(n)
 	**/
 }
@@ -78,9 +78,46 @@ function frequencySortII(string){
 
 
 	/**
-	 * TC: O(n) + O(n * logn)
+	 * TC: O(n) + O(k * logk) + O(k)
 	 * SC: O(n)
 	**/
 }
 
-console.log(frequencySortII("tree")); // "eert" OR "eetr"
+//console.log(frequencySortII("tree")); // "eert" OR "eetr"
+
+
+
+function frequencySortIII(string){
+	const map = new Map();
+
+	for(let char of string){
+		map.set(char, (map.get(char) || 0) + 1)
+	}
+
+	const freqArr = [...map];
+	//[ [ 't', 1 ], [ 'r', 1 ], [ 'e', 2 ] ]
+
+	freqArr.sort( (a, b) => {
+		if(a[1] !== b[1]) { return b[1] - a[1] }
+		else {
+			// return a[0].localeCompare(b[0])
+
+			/** for ASCII order like "A" (65) should come before "a" (97) **/
+			if(a[0] < b[0]) return -1;
+			else if(a[0] > b[0]) return 1;
+			else return 0;
+		}
+	});
+
+	const response = [];
+	for(let [char, _] of freqArr){
+		response.push(char);
+	}
+	return response;
+
+	/**
+	 * TC: O(n) + O(k * logk) + O(k)
+	 * SC: O(n)
+	**/
+}
+console.log(frequencySortIII("tree"));
