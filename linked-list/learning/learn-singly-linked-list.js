@@ -1,5 +1,5 @@
 // class to create node
-class Node {
+export class Node {
 	constructor(data, next = null){
 		this.data = data;
 		this.next = next;
@@ -11,7 +11,7 @@ class Node {
 /** linked list problems always returns the head of the LL **/
 
 /** convert array to linked list **/
-function convertArrayToLL(arr){
+export function convertArrayToLL(arr){
 	if(!arr.length) return null;
 
 	// created the head of the linked list
@@ -38,7 +38,7 @@ function convertArrayToLL(arr){
 }
 
 /** traverse through the linked list **/
-function traverseLL(head){
+export function traverseLL(head){
 	/** this head is noting but the pointer of the first element of LL **/
 	let temp = head;
 
@@ -128,18 +128,65 @@ function insertElAtTail(head, el){
 	return head;
 }
 
-const arr = [];
-const head = convertArrayToLL(arr);
-console.log("length of LL: " + lengthOfLL(head));
-console.log("Given elelement's existance: " + findElementInLL(head, 5))
-console.log("Tail of the LL: " + tailEleOfLL(head));
+/** remove nth node **/
+function removeNthNode(head, n){
+	if(!head) return null;
+	if(n === 1) return head.next;
+	let prev = head; let temp = head.next; let cnt = 1;
+
+	while(temp){
+		cnt++;
+		if(cnt === n) break;
+		prev = temp;
+		temp = temp.next;
+	}
+	prev.next = temp.next;
+	return head;
+}
+
+/** remove node from LL **/
+function removeNode(head, node){
+	if(!head) return null;
+	if(head === node) return head.next;
+	let prev = head; let temp = head.next;
+	while(temp){
+		if(temp === node) break;
+		prev = temp;
+		temp = temp.next;
+	}
+
+	prev.next = temp ? temp.next : null; 
+	return head;
+}
+
+/** insert new node at nth position ( 1 >= n <= length ) **/
+function insertNewNode(head, val, n){
+	const newHead = new Node(-1, head);
+	let cnt = 1;
+	let prev = newHead; let temp = head;
+	while(temp){
+		if(cnt === n) break;
+		prev = temp;
+		temp = temp.next;
+		cnt++;
+	}
+	const newNode = new Node(val, temp);
+	prev.next = newNode;
+	return newHead.next;
+
+}
+
+// const arr = [4, 6, 8, 9, 5, 11];
+// const head = convertArrayToLL(arr);
+// console.log("length of LL: " + lengthOfLL(head));
+// console.log("Given elelement's existance: " + findElementInLL(head, 5))
+// console.log("Tail of the LL: " + tailEleOfLL(head));
 
 // const newHead = removeHeadOfLL(head);
 // traverseLL(newHead);
 // console.log("length of new LL: " + lengthOfLL(newHead));
 // console.log("Given elelement's existance in new LL: " + findElementInLL(newHead, 1))
 // console.log("Tail of the new LL: " + tailEleOfLL(newHead));
-
 
 // const newHead = removeTailOfLL(head);
 // traverseLL(newHead);
@@ -153,10 +200,20 @@ console.log("Tail of the LL: " + tailEleOfLL(head));
 // console.log("Given elelement's existance in new LL: " + findElementInLL(newHead, 5))
 // console.log("Tail of the new LL: " + tailEleOfLL(newHead));
 
+// let newHead = insertElAtTail(head, 6);
+// traverseLL(newHead);
+// console.log("length of new LL: " + lengthOfLL(newHead));
+// console.log("Given elelement's existance in new LL: " + findElementInLL(newHead, 5))
+// console.log("Tail of the new LL: " + tailEleOfLL(newHead));
 
+// let newHead = removeNthNode(head, 2);
+// traverseLL(newHead);
+// console.log("length of new LL: " + lengthOfLL(newHead));
 
-let newHead = insertElAtTail(head, 6);
-traverseLL(newHead);
-console.log("length of new LL: " + lengthOfLL(newHead));
-console.log("Given elelement's existance in new LL: " + findElementInLL(newHead, 5))
-console.log("Tail of the new LL: " + tailEleOfLL(newHead));
+// let newHead = removeNode(head, head.next.next.next.next.next);
+// traverseLL(newHead);
+// console.log("length of new LL: " + lengthOfLL(newHead));
+
+// let newHead = insertNewNode(head, 0, 8);
+// traverseLL(newHead);
+// console.log("length of new LL: " + lengthOfLL(newHead));
